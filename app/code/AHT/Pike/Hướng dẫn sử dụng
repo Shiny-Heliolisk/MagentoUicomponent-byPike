@@ -1,0 +1,19 @@
+1. Tạo 1 module: 
+Copy file registration.php, composer.json,etc/module.xml rồi chạy: php bin/magento s:up
+2. Tạo bảng trong database:
+Copy file etc/db_schema.xml rồi chạy:php bin/magento s:up
+3. Tạo dữ liệu cho bảng:
+Copy file Setup/UpgradeData.php rồi chạy php bin/magento s:up
+4. Tạo route cho backend:
+Copy file etc/adminhtml/routes.xml
+5. Tạo Controller:
+Copy toàn bộ folder Controller
+6. Tạo Model:
+Copy toàn bộ folder Model
+7. Tạo View:
+Copy toàn bộ file view
+8. Tạo 1 phần tử mới ở thanh menu
+Copy file etc/adminhtml/menu.xml
+9. Đăng kí dữ liệu đổ vào view:
+Copy file etc/di.xml chạy lệnh php bin/magento setup:di:compile && php bin/magento s:up
+10. Copy nốt những folder c
