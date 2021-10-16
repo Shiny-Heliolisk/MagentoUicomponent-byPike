@@ -32,7 +32,7 @@ class Save extends Action
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
-        $id = !empty($data['pike_id']) ? $data['Pike_id'] : null;
+        $id = !empty($data['pike_id']) ? $data['pike_id'] : null;
  
         $newData = [
             'name' => $data['name'],

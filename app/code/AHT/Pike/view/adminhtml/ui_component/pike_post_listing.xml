@@ -70,10 +70,7 @@
 			</action>
 			<action name="edit">
 				<settings>
-					<callback>
-						<target>editSelected</target>
-						<provider>pike_post_listing.pike_post_listing.aht_pike_post_columns</provider>
-					</callback>
+					<url path="pike/post/edit"/>
 					<type>edit</type>
 					<label translate="true">Edit</label>
 				</settings>
@@ -113,47 +110,12 @@
 			</settings>
 		</column>
 		<actionsColumn name="actions" class="AHT\Pike\Ui\Component\Listing\Grid\Column\Action">
-            <settings>
-                <indexField>pike_id</indexField>
-            </settings>
-        </actionsColumn>
-	</columns>
-	<columns name="pike_post_columns">
-		<selectionsColumn name="ids">
 			<settings>
 				<indexField>pike_id</indexField>
+				<resizeEnabled>false</resizeEnabled>
+				<resizeDefaultWidth>107</resizeDefaultWidth>
 			</settings>
-		</selectionsColumn>
-		<column name="pike_id">
-			<settings>
-				<filter>text</filter>
-				<sorting>asc</sorting>
-				<label translate="true">ID</label>
-			</settings>
-		</column>
-		
-		<column name="pike_id">
-			<settings>
-				<filter>text</filter>
-				<label translate="true">ID</label>
-			</settings>
-		</column>
-		<column name="name">
-			<settings>
-				<filter>text</filter>
-				<label translate="true">Name</label>
-			</settings>
-		</column>
-		<column name="content">
-			<settings>
-				<filter>text</filter>
-				<label translate="true">Content</label>
-			</settings>
-		</column>
-		<actionsColumn name="actions" class="AHT\Pike\Ui\Component\Listing\Grid\Column\Action">
-            <settings>
-                <indexField>pike_id</indexField>
-            </settings>
-        </actionsColumn>
+		</actionsColumn>
 	</columns>
+	
 </listing>

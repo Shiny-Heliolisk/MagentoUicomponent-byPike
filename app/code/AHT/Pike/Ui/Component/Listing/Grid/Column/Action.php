@@ -1,42 +1,38 @@
 <?php
- 
-namespace AHT\Pike\Ui\Component\Listing\Grid\Column;
- 
-use Magento\Framework\View\Element\UiComponent\ContextInterface;
-use Magento\Framework\View\Element\UiComponentFactory;
-use Magento\Ui\Component\Listing\Columns\Column;
-use Magento\Framework\UrlInterface;
- 
 /**
- * Class Action
- * @package ViMagento\HelloWorld\Ui\Component\Listing\Grid\Column
+ * Copyright ©  All rights reserved.
+ * See COPYING.txt for license details.
  */
-class Action extends Column
+declare(strict_types=1);
+
+namespace AHT\Pike\Ui\Component\Listing\Grid\Column;
+
+class Action extends \Magento\Ui\Component\Listing\Columns\Column
 {
-    /**
-     * @var UrlInterface
-     */
+
+    const URL_PATH_DELETE = 'pike/post/delete';
+    const URL_PATH_EDIT = 'pike/post/edit';
     protected $urlBuilder;
- 
+    const URL_PATH_DETAILS = 'pike/post/details';
+
     /**
-     * Action constructor.
-     * @param UrlInterface $urlBuilder
-     * @param ContextInterface $context
-     * @param UiComponentFactory $uiComponentFactory
+     * @param \Magento\Framework\View\Element\UiComponent\ContextInterface $context
+     * @param \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory
+     * @param \Magento\Framework\UrlInterface $urlBuilder
      * @param array $components
      * @param array $data
      */
     public function __construct(
-        UrlInterface $urlBuilder,
-        ContextInterface $context,
-        UiComponentFactory $uiComponentFactory,
+        \Magento\Framework\View\Element\UiComponent\ContextInterface $context,
+        \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory,
+        \Magento\Framework\UrlInterface $urlBuilder,
         array $components = [],
         array $data = []
     ) {
         $this->urlBuilder = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
- 
+
     /**
      * Prepare Data Source
      *
@@ -47,23 +43,35 @@ class Action extends Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
-                $item[$this->getData('name')] = [
-                    'edit' => [
-                        'href' => $this->urlBuilder->getUrl('pike/post/edit', ['id' => $item['pike_id']]),
-                        'label' => __('Edit')
-                    ],
-                    'delete' => [
-                        'href' => 'pike/post/delete',
-                        'label' => __('Delete')
-                    ],
-                    'duplicate' => [
-                        'href' => '/duplicate',
-                        'label' => __('Duplicate')
-                    ]
-                ];
+                if (isset($item['pike_id'])) {
+                    $item[$this->getData('name')] = [
+                        'edit' => [
+                            'href' => $this->urlBuilder->getUrl(
+                                static::URL_PATH_EDIT,
+                                [
+                                    'pike_id' => $item['pike_id']
+                                ]
+                            ),
+                            'label' => __('Edit')
+                        ],
+                        'delete' => [
+                            'href' => $this->urlBuilder->getUrl(
+                                static::URL_PATH_DELETE,
+                                [
+                                    'pike_id' => $item['pike_id']
+                                ]
+                            ),
+                            'label' => __('Delete'),
+                            'confirm' => [
+                                'title' => __('Delete "${ $.$data.title }"'),
+                                'message' => __('Are you sure you wan\'t to delete a "${ $.$data.title }" record?')
+                            ]
+                        ]
+                    ];
+                }
             }
         }
- 
+        
         return $dataSource;
     }
 }

@@ -10,7 +10,7 @@ namespace AHT\Pike\Controller\Adminhtml;
 abstract class Post extends \Magento\Backend\App\Action
 {
 
-    const ADMIN_RESOURCE = 'AHT_Pike::top_level';
+    const ADMIN_RESOURCE = 'AHT_Pike::Pike';
     protected $_coreRegistry;
 
     /**
